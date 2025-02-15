@@ -9,4 +9,8 @@
     browser will store the session ID in cookies or local storage or session storage
     user logs out: session is destroyed and session ID deleted from browser
 
+    response local property is an object that holds response local variables
+    spesific to the current request. It has a scope limit to the request and it's 
+    accesible only to the views rendering during the particular request response cycle.
+    send data stored on the session to the client inside the response locals
 */
