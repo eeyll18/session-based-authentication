@@ -1,4 +1,3 @@
-// basic express server
 const express = require("express");
 const session = require("express-session");
 const { checkedLoggedIn, byPassLogin } = require("./middlewares");
@@ -11,7 +10,7 @@ app.use(express.urlencoded({ extended: false })); // to use query string library
 
 app.use(
   session({
-    secret: "my_session_secret",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
     name: "session",
@@ -38,7 +37,10 @@ app.get("/login", byPassLogin, (req, res) => {
 app.post("/login", (req, res) => {
   console.log(req.body);
 
-  if (req.body.username === "eda" && req.body.password === "123") {
+  if (
+    req.body.username === process.env.DEMO_USERNAME &&
+    req.body.password === process.env.DEMO_PASSWORD
+  ) {
     // create session and store user logged details
     req.session.user = { id: 1, username: "eda", name: "Eda Gunay" };
     res.redirect("/");
